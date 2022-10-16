@@ -52,6 +52,14 @@ async def on_wavelink_track_end(player: Scripting_x_player, track:wavelink.Track
     if not player.queue.is_empty:
         next_track = player.queue.get()
         await player.play(next_track)
+        
+@client.disconnect
+async def disconnect(ctx):
+    vc = ctx.voice_client
+    if vc:
+        await vc.disconnect()
+    else:
+        await ctx.send("Moron I am not even connected !!")
 
 # @client.event 
 # async def on_message(message):
@@ -161,14 +169,7 @@ async def skip(ctx):
             await voice.resume()
     else:
         await ctx.send("moron connect me to a channel first")
-        
-# @play.error
-# async def play_error(ctx, error):
-#     if isinstance(error, commands.BadArgument):
-#         await ctx.send("Jeez couldnt find the track")
-#     else:
-#         await ctx.send("Join a channel first moron")
-            
+                    
 
 @client.command()
 async def clear(ctx, amount=10):
