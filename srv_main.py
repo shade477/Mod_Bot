@@ -53,31 +53,13 @@ async def on_wavelink_track_end(player: Scripting_x_player, track:wavelink.Track
         next_track = player.queue.get()
         await player.play(next_track)
         
-@client.disconnect
+@client.command()
 async def disconnect(ctx):
-    vc = ctx.voice_client
-    if vc:
-        await vc.disconnect()
+    voice = ctx.voice_client
+    if voice:
+        await voice.disconnect()
     else:
         await ctx.send("Moron I am not even connected !!")
-
-# @client.event 
-# async def on_message(message):
-    
-#     # same
-#     if message.author == client.user:
-#         return 
-
-#     ms = message.content
-#     # diff
-#     if message.content.startswith('$hello'):
-#         await message.channel.send('Hello fellow user')
-        
-#     if message.content.startswith('developer'):
-#         await message.channel.send('By Purbayan Majumder')
-    
-#     if any(wrd in ms for wrd in depresssed_env):
-#         await message.channel.send(random.choice(encourged_resp))
         
 # join the user's channel
 @client.command()
@@ -170,12 +152,5 @@ async def skip(ctx):
     else:
         await ctx.send("moron connect me to a channel first")
                     
-
-@client.command()
-async def clear(ctx, amount=10):
-    await ctx.channel.purge(limit=amount)
-    await ctx.send("Hold on !! clearing all message logs")    
-    
-
         
-client.run('DISCORD_TKN')
+client.run('your token')

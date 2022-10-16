@@ -17,7 +17,7 @@ async def display(ctx):
         if ((i > 0) and (i%3) == 0):
             message = message + '\n'
         if(board[i] == 0):
-            message += ('- ')
+            message += '- '
         if (board[i] == 1):
             message += 'O '
         if(board[i] == -1):    
@@ -27,16 +27,22 @@ async def display(ctx):
     
     
 #This function takes the user move as input and make the required changes on the board.    
+
+def p1turn(message):
+    update_player_moves()
+    if not p_moves:
+        await message.channel.send('Enter X\'s position from [1...9]:')
+    else:
+        await message.channel.send(f"Entered position is {p_moves}")    
+        if(board[p_moves-1] != 0):
+            await message.channel.send('Wrong move!!! Enter again ')
+            p1turn(message)
+        board[p_moves-1] = -1
+
 @client.command()
-async def p1turn(ctx, message):
-    
-    await ctx.send('Enter X\'s position from [1...9]:')
+async def update_player_moves(message):
     p_moves = message.content
-    if(board[p_moves-1] != 0):
-        await ctx.send('Wrong move!!! Enter again ')
-        p1turn(ctx,board)
-    board[p_moves-1] = -1
-    
+
 # def analyzeboard(self):
 def analyzeboard():
     cb=[[0,1,2],
@@ -110,4 +116,4 @@ async def play_game(ctx):
         display()
         print("O Wins!!! X Loose !!!")
 
-client.run('MTAzMDg3NjQzNjU2NDgxOTk2OA.GlwBGj.uvNKFBAhfB5R4R_GwADJpsxr2-SX2QfNa_uiME')
+client.run('MTAzMDg3NjQzNjU2NDgxOTk2OA.Go2fIP.SYc2jPeV0aVgUk3A36cZHWgz_K_BVWxGQUcn3I')
