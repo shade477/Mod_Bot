@@ -16,10 +16,12 @@ async def display(ctx):
     for i in range(0,9):
         if ((i > 0) and (i%3) == 0):
             message = message + '\n'
-        match(board[i]):
-            case  0  : message += '- '
-            case  1  : message += 'O '
-            case -1  : message += 'X '
+        if(board[i] == 0):
+            message += ('- ')
+        if (board[i] == 1):
+            message += 'O '
+        if(board[i] == -1):    
+            message += 'X '
         message += '\n\n'
     await ctx.send(message)
     
